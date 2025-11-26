@@ -12,7 +12,7 @@ function App() {
 
   return (
     <div style={{ padding: 50 }}>
-      <h1>Vite + Node Docker Sample</h1>
+      <h1>Docker Sample</h1>
       <p>{message || 'Loading...'}</p>
     </div>
   );
