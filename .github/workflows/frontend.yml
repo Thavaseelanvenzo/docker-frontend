@@ -2,10 +2,8 @@ name: Build & Push Frontend Image
 
 on:
   push:
-    paths:
-      - "frontend/**"
-      - ".github/workflows/frontend.yml"
     branches: ["main"]
+  workflow_dispatch:
 
 jobs:
   build:
@@ -21,8 +19,7 @@ jobs:
 
       - name: Build Frontend Image
         run: |
-          docker build -f frontend/Dockerfile.frontend \
-          -t ${{ secrets.DOCKERHUB_USERNAME }}/talnt-frontend:latest .
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/talnt-frontend:latest .
 
       - name: Push Image
         run: |

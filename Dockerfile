@@ -4,22 +4,22 @@ WORKDIR /app
 
 # Stage 2: Dependencies
 FROM base AS dependencies
-COPY frontend/package*.json ./
+COPY package*.json ./
 RUN npm ci && npm cache clean --force
 
 # Stage 3: Development
 FROM base AS development
-COPY frontend/package*.json ./
+COPY package*.json ./
 RUN npm install
-COPY frontend ./
+COPY . ./
 EXPOSE 5173
 CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0"]
 
 # Stage 4: Build
 FROM base AS build
-COPY frontend/package*.json ./
+COPY package*.json ./
 RUN npm ci
-COPY frontend ./
+COPY . ./
 RUN npm run build
 
 # Stage 5: Production (Node server)
